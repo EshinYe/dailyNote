@@ -1,0 +1,56 @@
+叶志欣，你的svn账户是叶志欣，你的svn账户是yezhixin 密码2wsx$RFV密码2wsx$RFV
+oracle:   
+192.168.59.99  用户名/密码     sys/sys   system/manager   公参库 : upaypub/upaypub  天猫实时交易 ：tmall/tmall 互联网实时交易 ：mc/mc
+
+tns:
+
+orcl11g =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.59.99 )(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = orcl11g.us.oracle.com)
+    )
+  )
+sqlplus system/manager@orcl11g
+GRANT SELECT ANY DICTIONARY TO tmall;
+
+sybase:
+datasource.jdbcUrl=jdbc:sybase:Tds:192.168.59.23:6000/upay2mc?charset=eucgb&language=us_english
+datasource.user=upaytmall
+datasource.pass=upaytmall
+dbservername=chinasofti
+
+192.168.59.100  5000 sa abcd-1234   tmalldba/tmalldba
+
+192.168.59.45  admin  qwe123 @xe  oracle
+192.168.59.45  admin  NRX@admin2015 host
+
+linux 连接参数
+192.168.59.23  Sybase：sybase2/sybase2
+192.168.59.99  oracle: oracle/oracle       upay2/upay2
+
+192.168.59.126/127        admin/Rebt@729
+datasource.driver=com.sybase.jdbc4.jdbc.SybDriver
+datasource.jdbcUrl=jdbc:sybase:Tds:192.168.59.126:5000/upay2tmall?charset=eucgb&language=us_english
+datasource.user=tmalldba
+datasource.pass=Tmall_100
+dbservername=sybtest
+
+
+http://localhost:8080/CMUPayImitator/
+http://192.168.59.102:4080/jenkins/      admin Mobmkt-515
+http://192.168.59.45:8080/XPay-Sinmulator/
+
+192.168.106.67  Admin_123
+192.168.59.200  Admin_123
+192.168.59.45   NRX@admin2015
+本地到远程
+scp CheckUtil.class admin@192.168.106.67:/opt/xpay/apache-tomcat-8.0.30/CMSZService/WEB-INF/classes/com/cmsz/utils 
+远程到本地
+scp  admin@192.168.106.67:/opt/xpay/apache-tomcat-8.0.30/webapps/XPay-pay-front/WEB-INF/config/system.conf /opt/xpay/
+tar -zcvf XPay-pay-front.tar.gz XPay-pay-front
+tar -zxvf XPay-merchant-front.tar.gz
+zip -r XPay-core.zip XPay-core
+
+http://localhost:8080/TestCMSZ/findlistfront/list.action?USER_ID=111&ORDER_TIME=2016-02-02 22:22:23&BS=0

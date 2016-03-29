@@ -1,0 +1,115 @@
+<bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+<!-- results in a setDriverClassName(String) call -->
+<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+<property name="url" value="jdbc:mysql://localhost:3306/mydb"/>
+<property name="username" value="root"/>
+<property name="password" value="masterkaoli"/>
+</bean>
+----------------------------------------------------------------------------
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:p="http://www.springframework.org/schema/p"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+<bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+destroy-method="close"
+p:driverClassName="com.mysql.jdbc.Driver"
+p:url="jdbc:mysql://localhost:3306/mydb"
+p:username="root"
+p:password="masterkaoli"/>
+</beans>
+=================================================================================================
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:p="http://www.springframework.org/schema/p"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+<bean name="john-classic" class="com.example.Person">
+<property name="name" value="John Doe"/>
+<property name="spouse" ref="jane"/>
+</bean>
+-------------------------------------------------
+<bean name="john-modern"
+class="com.example.Person"
+p:name="John Doe"
+p:spouse-ref="jane"/>
+-------------------------------------------------------
+<bean name="jane" class="com.example.Person">
+<property name="name" value="Jane Doe"/>
+</bean>
+</beans>
+===========================================================================================
+<bean id="lazy" class="com.foo.ExpensiveToCreateBean" lazy-init="true"/>
+=====================================================================================
+use @Configuration and @Bean
+@Configuration
+public class AppConfig {
+@Bean(name = "myFoo")
+public Foo foo() {
+return new Foo();
+}
+}
+----------------------------------------------------
+@Configuration
+public class ConfigA {
+@Bean
+public A a() {
+return new A();
+}
+}
+@Configuration
+@Import(ConfigA.class)
+public class ConfigB {
+@Bean
+public B b() {
+return new B();
+}
+}
+
+
+public static void main(String[] args) {
+ApplicationContext ctx = new AnnotationConfigApplicationContext(ConfigB.class);
+// now both beans A and B will be available...
+A a = ctx.getBean(A.class);
+B b = ctx.getBean(B.class);
+}
+
+===================================================================================
+Resource template = ctx.getResource("classpath:some/resource/path/myTemplate.txt");
+Resource template = ctx.getResource("file:///some/resource/path/myTemplate.txt");
+Resource template = ctx.getResource("http://myhost.com/resource/path/myTemplate.txt");
+
+<bean id="myBean" class="...">
+<property name="template" value="some/resource/path/myTemplate.txt"/>
+</bean>
+<property name="template" value="classpath:some/resource/path/myTemplate.txt">
+<property name="template" value="file:///some/resource/path/myTemplate.txt"/>
+
+=============================================================================================
+A URI template can be assembled from type and path level @RequestMapping annotations. As a result
+the findPet() method can be invoked with a URL such as /owners/42/pets/21.
+
+@Controller
+@RequestMapping("/owners/{ownerId}")
+public class RelativePathUriTemplateController {
+@RequestMapping("/pets/{petId}")
+public void findPet(@PathVariable String ownerId, @PathVariable String petId, Model model) {
+// implementation omitted
+}
+}
+
+------------------------------------------------------------------------------------
+<mvc:annotation-driven enable-matrix-variables="true"/>
+
+// GET /owners/42;q=11/pets/21;q=22
+@RequestMapping(value = "/owners/{ownerId}/pets/{petId}", method = RequestMethod.GET)
+public void findPet(
+@MatrixVariable(value="q", pathVar="ownerId") int q1,
+@MatrixVariable(value="q", pathVar="petId") int q2) {
+// q1 == 11
+// q2 == 22
+}
+========================================================================================
+
+

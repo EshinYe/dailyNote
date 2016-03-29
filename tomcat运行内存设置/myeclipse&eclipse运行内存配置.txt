@@ -1,0 +1,22 @@
+
+myeclipse
+-Xms256m -Xmx512m
+-Dcom.sun.management.jmxremote=true
+
+
+eclipse
+-Xms128M -Xmx512M -XX:PermSize=128M -XX:MaxPermSize=256M
+
+
+-Xms256m -Xmx256m -XX:MaxNewSize=256m -XX:MaxPermSize=256m
+
+
+-Xms:表示jvm堆内存初始化大小
+
+-Xmx:表示jvm堆内存可被分配的最大上限
+
+-xx:MaxNewSize:表示新生代可被分配的内存的最大上限；当然这个值应该小于 -Xmx的值；
+
+-XX:MaxPermSize:表示对非堆区域设置的最大值
+
+-XX:PermSize：表示非堆区初始内存分配大小，其缩写为permanent size（持久化内存）
