@@ -1,0 +1,3 @@
+# dailyNote
+dailyNote
+dailynote
